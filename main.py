@@ -17,6 +17,9 @@ class Panel(QWidget):
         self.warning_label.setText(self.get_info_icon_and_text()[1])
         self.q_msg_box = QMessageBox()
         self.q_msg_box.setWindowTitle('Message')
+        self.q_msg_box.setInformativeText("Do you want to start a new game?")
+        self.q_msg_box.addButton('New Game', QMessageBox.AcceptRole)
+        self.q_msg_box.addButton("I'm Done", QMessageBox.RejectRole)
         self.table.setRowCount(3)
         self.table.setColumnCount(3)
         self.table.horizontalHeader().setVisible(False)
@@ -107,9 +110,6 @@ class Panel(QWidget):
         @param message: message to show in the message box
         """
         self.q_msg_box.setText(message)
-        self.q_msg_box.setInformativeText("Do you want to start a new game?")
-        self.q_msg_box.addButton('New Game', QMessageBox.AcceptRole)
-        self.q_msg_box.addButton("I'm Done", QMessageBox.RejectRole)
         ret = self.q_msg_box.exec_()
         self.clear_everything(ret)
 
@@ -118,6 +118,7 @@ class Panel(QWidget):
             self.table.clear()
             self.count = 0
             self.warning_label.setText(self.get_info_icon_and_text()[1])
+            self.q_msg_box.close()
         else:
             self.close()
             self.q_msg_box.close()
