@@ -12,5 +12,5 @@ How to add this into Nuke
 
 *Please note use Nuke 13, previous versions are not compatible 
 
-![Screenshot 1](Screenshot_1.jpg)
-![Screenshot 1](Screenshot_2.jpg)
+![Screenshot 1](screenshots/Screenshot_1.jpg)
+![Screenshot 1](screenshots/Screenshot_2.jpg)
