@@ -1,8 +1,10 @@
+import os.path
 import sys
-
+import os
 from PySide2.QtGui import QPixmap, QFont
 from PySide2.QtWidgets import *
 
+icon_path = os.path.dirname(__file__)
 
 class Panel(QWidget):
     count = 0
@@ -13,7 +15,9 @@ class Panel(QWidget):
         self.table = QTableWidget()
         self.warning_label = QLabel()
         self.warning_label.setFont(new_font)
-        self.new_game_button = QPushButton('New Game')
+        self.new_game_button = QPushButton('Reset')
+        self.new_game_button.setMinimumSize(100, 50)
+        self.new_game_button.setFont(new_font)
         self.warning_label.setText(self.get_info_icon_and_text()[1])
         self.q_msg_box = QMessageBox()
         self.q_msg_box.setWindowTitle('Message')
@@ -59,12 +63,12 @@ class Panel(QWidget):
     def get_info_icon_and_text(self):
         if self.count % 2:
             player = 'Player O'
-            icon = './icons/icon1.png'
-            text_warning = 'Player O turn!'
+            icon = os.path.join(icon_path, 'icons/icon1.png').replace('\\', '/')
+            text_warning = '<P style="color:#8EF5FF;">Player O turn!</p>'
         else:
             player = 'Player X'
-            icon = './icons/icon2.png'
-            text_warning = 'Player X turn!'
+            icon = os.path.join(icon_path, 'icons/icon2.png').replace('\\', '/')
+            text_warning = '<P style="color:#f7e778;">Player X turn!</p>'
         return icon, text_warning, player
 
     def logic_tic(self):
@@ -130,14 +134,19 @@ color:white;
 }
 QPushButton{background-color:#6b7fd7;
 color:black;
-min-height:25px;
-min-width:100px;
 border-radius : 5px;
 }
 '''
 
-app = QApplication([])
-app.setStyleSheet(style)
-panel = Panel()
-panel.show()
-sys.exit(app.exec_())
+
+def tic_tac_run():
+    tic_tac_run.panel = Panel()
+    tic_tac_run.panel.show()
+
+
+if __name__ == '__main__':
+    app = QApplication([])
+    app.setStyleSheet(style)
+    panel = Panel()
+    panel.show()
+    sys.exit(app.exec_())
