@@ -16,7 +16,7 @@ class Panel(QWidget):
         self.warning_label = QLabel()
         self.warning_label.setFont(new_font)
         self.new_game_button = QPushButton('Reset')
-        self.new_game_button.setMinimumSize(100, 50)
+        self.new_game_button.setMinimumSize(10, 50)
         self.new_game_button.setFont(new_font)
         self.warning_label.setText(self.get_info_icon_and_text()[1])
         self.q_msg_box = QMessageBox()
@@ -133,7 +133,9 @@ QWidget{background-color: #50514f;
 color:white;
 }
 QPushButton{background-color:#6b7fd7;
-color:black;
+color:white;
+min-height:25px;
+min-width:100px;
 border-radius : 5px;
 }
 '''
