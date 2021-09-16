@@ -6,6 +6,7 @@ from PySide2.QtWidgets import *
 
 icon_path = os.path.dirname(__file__)
 
+
 class Panel(QWidget):
     count = 0
 
@@ -15,14 +16,14 @@ class Panel(QWidget):
         self.table = QTableWidget()
         self.warning_label = QLabel()
         self.warning_label.setFont(new_font)
-        self.new_game_button = QPushButton('Reset')
+        self.new_game_button = QPushButton("Reset")
         self.new_game_button.setMinimumSize(10, 50)
         self.new_game_button.setFont(new_font)
         self.warning_label.setText(self.get_info_icon_and_text()[1])
         self.q_msg_box = QMessageBox()
-        self.q_msg_box.setWindowTitle('Message')
+        self.q_msg_box.setWindowTitle("Message")
         self.q_msg_box.setInformativeText("Do you want to start a new game?")
-        self.q_msg_box.addButton('New Game', QMessageBox.AcceptRole)
+        self.q_msg_box.addButton("New Game", QMessageBox.AcceptRole)
         self.q_msg_box.addButton("I'm Done", QMessageBox.RejectRole)
         self.table.setRowCount(3)
         self.table.setColumnCount(3)
@@ -42,7 +43,7 @@ class Panel(QWidget):
         master_lay.addLayout(label_button_lay)
         master_lay.addWidget(self.table)
         self.setLayout(master_lay)
-        self.setWindowTitle('Tic Tac Toe')
+        self.setWindowTitle("Tic Tac Toe")
         self.setMinimumSize(900, 900)
 
     def tic_clicked(self, row, column):
@@ -62,41 +63,73 @@ class Panel(QWidget):
 
     def get_info_icon_and_text(self):
         if self.count % 2:
-            player = 'Player O'
-            icon = os.path.join(icon_path, 'icons/icon1.png').replace('\\', '/')
+            player = "Player O"
+            icon = os.path.join(icon_path, "icons/icon1.png").replace("\\", "/")
             text_warning = '<P style="color:#8EF5FF;">Player O turn!</p>'
         else:
-            player = 'Player X'
-            icon = os.path.join(icon_path, 'icons/icon2.png').replace('\\', '/')
+            player = "Player X"
+            icon = os.path.join(icon_path, "icons/icon2.png").replace("\\", "/")
             text_warning = '<P style="color:#f7e778;">Player X turn!</p>'
         return icon, text_warning, player
 
     def logic_tic(self):
         message = " Won"
         if self.count >= 5:
-            if self.get_object_name(0, 0) == \
-                    self.get_object_name(0, 1) == self.get_object_name(0, 2) != ' ':  # across the top
+            if (
+                self.get_object_name(0, 0)
+                == self.get_object_name(0, 1)
+                == self.get_object_name(0, 2)
+                != " "
+            ):  # across the top
                 self.msg_box(self.get_object_name(0, 0) + message)
-            elif self.get_object_name(1, 0) == \
-                    self.get_object_name(1, 1) == self.get_object_name(1, 2) != ' ':  # across the middle
+            elif (
+                self.get_object_name(1, 0)
+                == self.get_object_name(1, 1)
+                == self.get_object_name(1, 2)
+                != " "
+            ):  # across the middle
                 self.msg_box(self.get_object_name(1, 0) + message)
-            elif self.get_object_name(2, 0) == \
-                    self.get_object_name(2, 1) == self.get_object_name(2, 2) is not None:  # across the bottom
+            elif (
+                self.get_object_name(2, 0)
+                == self.get_object_name(2, 1)
+                == self.get_object_name(2, 2)
+                is not None
+            ):  # across the bottom
                 self.msg_box(self.get_object_name(2, 0) + message)
-            elif self.get_object_name(0, 0) == \
-                    self.get_object_name(1, 0) == self.get_object_name(2, 0) is not None:  # down the left side
+            elif (
+                self.get_object_name(0, 0)
+                == self.get_object_name(1, 0)
+                == self.get_object_name(2, 0)
+                is not None
+            ):  # down the left side
                 self.msg_box(self.get_object_name(0, 0) + message)
-            elif self.get_object_name(0, 1) == \
-                    self.get_object_name(1, 1) == self.get_object_name(2, 1) is not None:  # down the middle
+            elif (
+                self.get_object_name(0, 1)
+                == self.get_object_name(1, 1)
+                == self.get_object_name(2, 1)
+                is not None
+            ):  # down the middle
                 self.msg_box(self.get_object_name(0, 1) + message)
-            elif self.get_object_name(0, 2) == \
-                    self.get_object_name(1, 2) == self.get_object_name(2, 2) is not None:  # down the right side
+            elif (
+                self.get_object_name(0, 2)
+                == self.get_object_name(1, 2)
+                == self.get_object_name(2, 2)
+                is not None
+            ):  # down the right side
                 self.msg_box(self.get_object_name(0, 2) + message)
-            elif self.get_object_name(0, 0) == \
-                    self.get_object_name(1, 1) == self.get_object_name(2, 2) is not None:  # diagonal
+            elif (
+                self.get_object_name(0, 0)
+                == self.get_object_name(1, 1)
+                == self.get_object_name(2, 2)
+                is not None
+            ):  # diagonal
                 self.msg_box(self.get_object_name(0, 0) + message)
-            elif self.get_object_name(2, 0) == \
-                    self.get_object_name(1, 1) == self.get_object_name(0, 2) is not None:  # diagonal
+            elif (
+                self.get_object_name(2, 0)
+                == self.get_object_name(1, 1)
+                == self.get_object_name(0, 2)
+                is not None
+            ):  # diagonal
                 self.msg_box(self.get_object_name(2, 0) + message)
 
             if self.count == 9:
@@ -128,7 +161,7 @@ class Panel(QWidget):
             self.q_msg_box.close()
 
 
-style = '''
+style = """
 QWidget{background-color: #50514f;
 color:white;
 }
@@ -138,7 +171,7 @@ min-height:25px;
 min-width:100px;
 border-radius : 5px;
 }
-'''
+"""
 
 
 def tic_tac_run():
@@ -146,7 +179,7 @@ def tic_tac_run():
     tic_tac_run.panel.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication([])
     app.setStyleSheet(style)
     panel = Panel()
